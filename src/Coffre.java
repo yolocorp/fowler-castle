@@ -1,6 +1,8 @@
 
 public class Coffre implements I_Coffre {
 
+	private EtatCoffre etat;
+	
 	@Override
 	public void oterLivre() {
 		// TODO Auto-generated method stub
@@ -47,6 +49,10 @@ public class Coffre implements I_Coffre {
 	public String nomEtat() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void setEtat (EtatCoffre etat) {
+		this.etat = etat;
 	}
 
 }
