@@ -1,4 +1,4 @@
 
-public class Bloque {
+public class Bloque extends EtatCoffre {
 
 }
