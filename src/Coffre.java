@@ -6,7 +6,7 @@ public class Coffre implements I_Coffre {
 	private boolean lapinEstLibere;
 	
 	public Coffre () {
-		this.etat = new CacheParBibliotheque();
+		this.etat = CacheParBibliotheque.getInstance();
 		setChienEstLibere(false);
 		setLapinEstLibere(false);
 	}

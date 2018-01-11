@@ -1,8 +1,17 @@
 
 public class Ouvert extends EtatCoffre {
+	
+	private static EtatCoffre instance;
+	
+	public synchronized static EtatCoffre getInstance() {
+		if (instance == null) {
+			instance = new Ouvert();
+		}
+		return instance;
+	}
 
 	public void fermerCoffre (Coffre coffre) {
-		coffre.setEtat(new Ferme());
+		coffre.setEtat(Ferme.getInstance());
 	}
 	
 }

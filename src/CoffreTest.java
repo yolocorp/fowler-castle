@@ -10,10 +10,12 @@ import org.junit.Test;
 public class CoffreTest {
 	
 	private I_Coffre coffre;
+	private I_Coffre facadeCoffre;
 
 	@Before
 	public void setUp() throws Exception {
 		coffre = new Coffre();
+		facadeCoffre = new FacadeCoffre();
 	}
 
 	@After
@@ -159,4 +161,175 @@ public class CoffreTest {
 		assertTrue(coffre.chienEstLibere());
 		assertFalse(coffre.lapinEstLibere());
 	}
+	
+	@Test
+	public void testOterLivreDeuxFois() {
+		coffre.oterLivre();
+		coffre.oterLivre();
+		assertEquals("Ferme", coffre.nomEtat());
+		assertFalse(coffre.chienEstLibere());
+		assertFalse(coffre.lapinEstLibere());
+	}
+	
+	@Test
+	public void testFermerCoffreUneFois() {
+		coffre.fermerCoffre();
+		assertEquals("CacheParBibliotheque", coffre.nomEtat());
+		assertFalse(coffre.chienEstLibere());
+		assertFalse(coffre.lapinEstLibere());
+	}
+	
+	/*Facade Test*/
+	
+	@Test
+	public void testFacadeApresAvoirOteLeLivreDeLaBibliotheque() {
+		facadeCoffre.oterLivre();
+		assertEquals("Ferme",facadeCoffre.nomEtat());
+		assertFalse(facadeCoffre.chienEstLibere());
+		assertFalse(facadeCoffre.lapinEstLibere());
+	}
+	
+	@Test
+	public void testFacadeApresAvoirRemisLeLivreDansLaBibliothequeSansAvoirTouchePrealablementALaChandelle() {
+		facadeCoffre.oterLivre();
+		facadeCoffre.remettreLivre();
+		assertEquals("CacheParBibliotheque",facadeCoffre.nomEtat());
+		assertFalse(facadeCoffre.chienEstLibere());
+		assertFalse(facadeCoffre.lapinEstLibere());
+	}
+	
+	@Test
+	public void testFacadeApresAvoirOteLeLivreEtTourneLaChandelleVersLaDroiteUneFois() {
+		facadeCoffre.oterLivre();
+		facadeCoffre.tournerChandelleVersDroite();
+		assertEquals("PresqueOuvert", facadeCoffre.nomEtat());
+		assertTrue(facadeCoffre.chienEstLibere());
+		assertFalse(facadeCoffre.lapinEstLibere());
+	}
+
+	@Test
+	public void testFacadeApresAvoirOteLeLivreEtTourneLaChandelleVersLaDroiteUneFoisEtRemisLeLivre() {
+		facadeCoffre.oterLivre();
+		facadeCoffre.tournerChandelleVersDroite();
+		facadeCoffre.remettreLivre();
+		assertEquals("CacheParBibliotheque",facadeCoffre.nomEtat());
+		assertFalse(facadeCoffre.chienEstLibere());
+		assertFalse(facadeCoffre.lapinEstLibere());
+	}
+	
+	@Test
+	public void testFacadeApresAvoirOteLeLivreEtTourneLaChandelleVersLaDroiteDeuxFois() {
+		facadeCoffre.oterLivre();
+		facadeCoffre.tournerChandelleVersDroite();
+		facadeCoffre.tournerChandelleVersDroite();
+		assertEquals("Ouvert", facadeCoffre.nomEtat());
+		assertTrue(facadeCoffre.chienEstLibere());
+		assertFalse(facadeCoffre.lapinEstLibere());
+	}
+	
+	@Test
+	public void testFacadeApresAvoirOteLeLivreEtTourneLaChandelleVersLaGauche() {
+		facadeCoffre.oterLivre();
+		facadeCoffre.tournerChandelleVersGauche();
+		assertEquals("Bloque", facadeCoffre.nomEtat());
+		assertFalse(facadeCoffre.chienEstLibere());
+		assertTrue(facadeCoffre.lapinEstLibere());
+	}
+	
+	@Test
+	public void testFacadeApresAvoirOteLeLivreEtTourneLaChandelleVersLaGauchePuisRemisLeLivre() {
+		facadeCoffre.oterLivre();
+		facadeCoffre.tournerChandelleVersGauche();
+		facadeCoffre.remettreLivre();
+		assertEquals("Bloque", facadeCoffre.nomEtat());
+		assertFalse(facadeCoffre.chienEstLibere());
+		assertTrue(facadeCoffre.lapinEstLibere());
+	}
+	
+	@Test
+	public void testFacadeApresAvoirOteLeLivreEtTourneLaChandelleVersLaDroitePuisVersLaGauche() {
+		facadeCoffre.oterLivre();
+		facadeCoffre.tournerChandelleVersDroite();
+		facadeCoffre.tournerChandelleVersGauche();
+		assertEquals("Bloque", facadeCoffre.nomEtat());
+		assertTrue(facadeCoffre.chienEstLibere());
+		assertTrue(facadeCoffre.lapinEstLibere());
+	}
+	
+	@Test
+	public void testFacadeApresAvoirOteLeLivreEtTourneLaChandelleVersLaDroiteDeuxFoisPuisFermerCoffre() {
+		facadeCoffre.oterLivre();
+		facadeCoffre.tournerChandelleVersDroite();
+		facadeCoffre.tournerChandelleVersDroite();
+		facadeCoffre.fermerCoffre();
+		assertEquals("Ferme", facadeCoffre.nomEtat());
+		assertTrue(facadeCoffre.chienEstLibere());
+		assertFalse(facadeCoffre.lapinEstLibere());
+	}
+	
+	@Test
+	public void testFacadeApresAvoirOteLeLivreEtTourneLaChandelleVersLaDroiteDeuxFoisPuisFermerCoffreEtRemisLivre() {
+		facadeCoffre.oterLivre();
+		facadeCoffre.tournerChandelleVersDroite();
+		facadeCoffre.tournerChandelleVersDroite();
+		facadeCoffre.fermerCoffre();
+		facadeCoffre.remettreLivre();
+		assertEquals("CacheParBibliotheque", facadeCoffre.nomEtat());
+		assertFalse(facadeCoffre.chienEstLibere());
+		assertFalse(facadeCoffre.lapinEstLibere());
+	}
+	
+	@Test
+	public void testFacadeApresAvoirTourneLaChandelleVersLaDroite() {
+		facadeCoffre.tournerChandelleVersDroite();
+		assertEquals("CacheParBibliotheque", facadeCoffre.nomEtat());
+		assertFalse(facadeCoffre.chienEstLibere());
+		assertFalse(facadeCoffre.lapinEstLibere());
+	}
+	
+	@Test
+	public void testFacadeApresAvoirTourneLaChandelleVersLaGauche() {
+		facadeCoffre.tournerChandelleVersGauche();
+		assertEquals("CacheParBibliotheque", facadeCoffre.nomEtat());
+		assertFalse(facadeCoffre.chienEstLibere());
+		assertFalse(facadeCoffre.lapinEstLibere());
+	}
+	
+	@Test 
+	public void testFacadeReouvertureDuCoffreApresUneOuverture() {
+		facadeCoffre.oterLivre();
+		facadeCoffre.tournerChandelleVersDroite();
+		facadeCoffre.tournerChandelleVersDroite();
+		facadeCoffre.fermerCoffre();
+		
+		assertEquals("Ferme", facadeCoffre.nomEtat());
+		assertTrue(facadeCoffre.chienEstLibere());
+		assertFalse(facadeCoffre.lapinEstLibere());
+		
+		facadeCoffre.tournerChandelleVersDroite();
+		facadeCoffre.tournerChandelleVersDroite();
+		
+		assertEquals("Ouvert", facadeCoffre.nomEtat());
+		assertTrue(facadeCoffre.chienEstLibere());
+		assertFalse(facadeCoffre.lapinEstLibere());
+	}
+	
+	@Test
+	public void testFacadeOterLivreDeuxFois() {
+		facadeCoffre.oterLivre();
+		facadeCoffre.oterLivre();
+		assertEquals("Ferme", facadeCoffre.nomEtat());
+		assertFalse(facadeCoffre.chienEstLibere());
+		assertFalse(facadeCoffre.lapinEstLibere());
+	}
+	
+	@Test
+	public void testFacadeFermerCoffreUneFois() {
+		facadeCoffre.fermerCoffre();
+		assertEquals("CacheParBibliotheque", facadeCoffre.nomEtat());
+		assertFalse(facadeCoffre.chienEstLibere());
+		assertFalse(facadeCoffre.lapinEstLibere());
+	}
+	
+
 }
