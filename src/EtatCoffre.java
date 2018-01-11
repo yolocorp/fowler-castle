@@ -16,6 +16,6 @@ public abstract class EtatCoffre {
 	public void chienEstLibere (Coffre coffre) {}
 	
 	public String nomEtat () {
-		return this.getClass().toString();
+		return this.getClass().getName();
 	}
 }

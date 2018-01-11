@@ -1,5 +1,5 @@
 
-public class Cache extends EtatCoffre{
+public class CacheParBibliotheque extends EtatCoffre{
 	
 	public void oterLivre(Coffre coffre) {
 		coffre.setEtat(new Ferme());

@@ -2,57 +2,64 @@
 public class Coffre implements I_Coffre {
 
 	private EtatCoffre etat;
+	private boolean chienEstLibere;
+	private boolean lapinEstLibere;
+	
+	public Coffre () {
+		this.etat = new CacheParBibliotheque();
+		setChienEstLibere(false);
+		setLapinEstLibere(false);
+	}
 	
 	@Override
 	public void oterLivre() {
-		// TODO Auto-generated method stub
-
+		etat.oterLivre(this);
 	}
 
 	@Override
 	public void remettreLivre() {
-		// TODO Auto-generated method stub
-
+		etat.remettreLivre(this);
 	}
 
 	@Override
 	public void tournerChandelleVersDroite() {
-		// TODO Auto-generated method stub
-
+		etat.tournerChandelleVersDroite(this);
 	}
 
 	@Override
 	public void tournerChandelleVersGauche() {
-		// TODO Auto-generated method stub
-
+		etat.tournerChandelleVersGauche(this);
 	}
 
 	@Override
 	public void fermerCoffre() {
-		// TODO Auto-generated method stub
-
+		etat.fermerCoffre(this);
 	}
 
 	@Override
 	public boolean lapinEstLibere() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.lapinEstLibere;
 	}
 
 	@Override
 	public boolean chienEstLibere() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.chienEstLibere;
 	}
 
 	@Override
 	public String nomEtat() {
-		// TODO Auto-generated method stub
-		return null;
+		return etat.nomEtat();
 	}
 	
 	public void setEtat (EtatCoffre etat) {
 		this.etat = etat;
 	}
+	
+	public void setChienEstLibere (boolean chienEstLibere) {
+		this.chienEstLibere = chienEstLibere;
+	}
 
+	public void setLapinEstLibere (boolean lapinEstLibere) {
+		this.lapinEstLibere = lapinEstLibere;
+	}
 }
