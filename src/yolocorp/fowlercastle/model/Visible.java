@@ -1,3 +1,4 @@
+package yolocorp.fowlercastle.model;
 
 public abstract class  Visible extends EtatCoffre {
 	

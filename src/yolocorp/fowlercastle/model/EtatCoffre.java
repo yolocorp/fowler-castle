@@ -1,3 +1,4 @@
+package yolocorp.fowlercastle.model;
 
 public abstract class EtatCoffre {
 	
@@ -16,6 +17,6 @@ public abstract class EtatCoffre {
 	public void chienEstLibere (Coffre coffre) {}
 	
 	public String nomEtat () {
-		return this.getClass().getName();
+		return this.getClass().getSimpleName();
 	}
 }

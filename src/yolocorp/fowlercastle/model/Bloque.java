@@ -1,3 +1,4 @@
+package yolocorp.fowlercastle.model;
 
 public class Bloque extends EtatCoffre {
 

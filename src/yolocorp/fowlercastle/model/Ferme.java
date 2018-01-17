@@ -1,15 +1,18 @@
+package yolocorp.fowlercastle.model;
 
-public class PresqueOuvert extends Visible {
-
+public class Ferme extends Visible {
+	
 	private static EtatCoffre instance;
 	
 	public synchronized static EtatCoffre getInstance() {
 		if (instance == null) {
-			instance = new PresqueOuvert();
+			instance = new Ferme();
 		}
 		return instance;
 	}
+
 	public void tournerChandelleVersDroite(Coffre coffre) {
-		coffre.setEtat(Ouvert.getInstance());
+		coffre.setEtat(PresqueOuvert.getInstance());
+		coffre.setChienEstLibere(true);
 	}
 }

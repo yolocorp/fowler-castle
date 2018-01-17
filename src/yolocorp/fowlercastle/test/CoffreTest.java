@@ -1,9 +1,14 @@
+package yolocorp.fowlercastle.test;
 
 import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import yolocorp.fowlercastle.model.Coffre;
+import yolocorp.fowlercastle.model.FacadeCoffre;
+import yolocorp.fowlercastle.model.I_Coffre;
 
 
 

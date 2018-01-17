@@ -1,11 +1,18 @@
+package yolocorp.fowlercastle.model;
+import java.util.ArrayList;
+import java.util.List;
+
+import yolocorp.fowlercastle.observateur.Observateur;
 
 public class Coffre implements I_Coffre {
 
 	private EtatCoffre etat;
 	private boolean chienEstLibere;
 	private boolean lapinEstLibere;
+	private List<Observateur> auditeurs;
 	
 	public Coffre () {
+		this.auditeurs = new ArrayList<Observateur>();
 		this.etat = CacheParBibliotheque.getInstance();
 		setChienEstLibere(false);
 		setLapinEstLibere(false);
@@ -61,5 +68,19 @@ public class Coffre implements I_Coffre {
 
 	public void setLapinEstLibere (boolean lapinEstLibere) {
 		this.lapinEstLibere = lapinEstLibere;
+	}
+	
+	public void addObservateur(Observateur o) {
+		auditeurs.add(o);
+	}
+	
+	public void removeObservateur(Observateur o) {
+		auditeurs.remove(o);
+	}
+	
+	public void notifyObservateur() {
+		for(Observateur o : auditeurs) {
+			o.update(this);
+		}
 	}
 }

@@ -1,3 +1,6 @@
+package yolocorp.fowlercastle.model;
+
+import yolocorp.fowlercastle.observateur.Observateur;
 
 public class FacadeCoffre implements I_Coffre{
 	
@@ -40,5 +43,17 @@ public class FacadeCoffre implements I_Coffre{
 	@Override
 	public String nomEtat() {
 		return coffre.nomEtat();
+	}
+	
+	public void addObservateur(Observateur o) {
+		coffre.addObservateur(o);
+	}
+	
+	public void removeObservateur(Observateur o) {
+		coffre.removeObservateur(o);
+	}
+	
+	public void notifyObservateur() {
+		coffre.notifyObservateur();
 	}
 }

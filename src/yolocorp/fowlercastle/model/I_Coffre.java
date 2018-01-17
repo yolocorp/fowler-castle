@@ -1,3 +1,6 @@
+package yolocorp.fowlercastle.model;
+
+import yolocorp.fowlercastle.observateur.Observateur;
 
 public interface I_Coffre {
 
@@ -16,5 +19,11 @@ public interface I_Coffre {
 	public abstract boolean chienEstLibere();
 	
 	public abstract String nomEtat();
+	
+	public void addObservateur(Observateur o);
+	
+	public void removeObservateur(Observateur o);
+	
+	public void notifyObservateur();
 	
 }
