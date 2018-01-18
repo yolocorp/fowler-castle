@@ -60,6 +60,7 @@ public class Coffre implements I_Coffre {
 	
 	public void setEtat (EtatCoffre etat) {
 		this.etat = etat;
+		notifyObservateur();
 	}
 	
 	public void setChienEstLibere (boolean chienEstLibere) {

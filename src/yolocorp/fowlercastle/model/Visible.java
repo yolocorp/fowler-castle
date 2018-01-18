@@ -3,13 +3,14 @@ package yolocorp.fowlercastle.model;
 public abstract class  Visible extends EtatCoffre {
 	
 	public void remettreLivre(Coffre coffre) {
-		coffre.setEtat(CacheParBibliotheque.getInstance());
 		coffre.setChienEstLibere(false);
+		coffre.setEtat(CacheParBibliotheque.getInstance());
 	}
 	
 	public void tournerChandelleVersGauche (Coffre coffre) {
-		coffre.setEtat(Bloque.getInstance());
 		coffre.setLapinEstLibere(true);
+		coffre.setEtat(Bloque.getInstance());
+		
 	}
 
 }

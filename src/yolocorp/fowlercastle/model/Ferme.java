@@ -12,7 +12,7 @@ public class Ferme extends Visible {
 	}
 
 	public void tournerChandelleVersDroite(Coffre coffre) {
-		coffre.setEtat(PresqueOuvert.getInstance());
 		coffre.setChienEstLibere(true);
+		coffre.setEtat(PresqueOuvert.getInstance());
 	}
 }

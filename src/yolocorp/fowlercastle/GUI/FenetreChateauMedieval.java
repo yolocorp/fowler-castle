@@ -5,10 +5,11 @@ import javax.swing.*;
 
 import yolocorp.fowlercastle.model.Coffre;
 import yolocorp.fowlercastle.model.FacadeCoffre;
+import yolocorp.fowlercastle.observateur.Observateur;
 
 
 	public class FenetreChateauMedieval extends JFrame implements ActionListener,
-			WindowListener {
+			WindowListener, Observateur {
 
 		private JButton btOterLivre;
 		private JButton btRemettreLivre;
@@ -61,6 +62,10 @@ import yolocorp.fowlercastle.model.FacadeCoffre;
 			btFermerCoffre.addActionListener(this);
 			btQuitter.addActionListener(this);
 			
+			cacherBtChandelle();
+			cacherBtFermerCoffre();
+			cacherBtRemettreLivre();
+			
 			addWindowListener(this);
 			setVisible(true);
 			
@@ -68,6 +73,7 @@ import yolocorp.fowlercastle.model.FacadeCoffre;
 			this.fenetreChien = new FenetreChienGentil();
 			this.fenetreEtat = new FenetreEtat();
 			this.fenetreLapin = new FenetreLapinTueur();
+			
 			this.coffre.addObservateur(fenetreChien);
 			this.coffre.addObservateur(fenetreEtat);
 			this.coffre.addObservateur(fenetreLapin);			
@@ -78,22 +84,40 @@ import yolocorp.fowlercastle.model.FacadeCoffre;
 			if (e.getSource() == btOterLivre) {
 				System.out.println("Vous venez d'appuyer sur le bouton Oter Livre UML");
 				coffre.oterLivre();
+				cacherBtOterLivre();
+				afficherBtChandelle();
+				afficherBtRemettreLivre();
 			}
 			if (e.getSource() == btRemettreLivre) {
 				System.out.println("Vous venez d'appuyer sur le bouton Remettre Livre UML");
 				coffre.remettreLivre();
+				afficherBtOterLivre();
+				cacherBtChandelle();
+				cacherBtFermerCoffre();
+				cacherBtRemettreLivre();
 			}
 			if (e.getSource() == btTournerGauche) {
 				System.out.println("Vous venez d'appuyer sur le bouton Tourner Chandelle vers la Gauche");
 				coffre.tournerChandelleVersGauche();
+				cacherBtChandelle();
+				cacherBtFermerCoffre();
+				cacherBtRemettreLivre();
 			}
 			if (e.getSource() == btTournerDroite) {
 				System.out.println("Vous venez d'appuyer sur le bouton Tourner Chandelle vers la Droite");
 				coffre.tournerChandelleVersDroite();
+				if(coffre.nomEtat().equals("Ouvert")) {
+					cacherBtChandelle();
+					cacherBtRemettreLivre();
+					afficherBtFermerCoffre();
+				}
 			}
 			if (e.getSource() == btFermerCoffre) {
 				System.out.println("Vous venez d'appuyer sur le bouton Fermer Coffre");
 				coffre.fermerCoffre();
+				afficherBtChandelle();
+				afficherBtRemettreLivre();
+				cacherBtFermerCoffre();
 			}
 			if (e.getSource() == btQuitter)
 			{
@@ -115,7 +139,7 @@ import yolocorp.fowlercastle.model.FacadeCoffre;
 		public void windowOpened(WindowEvent arg0) {}
 
 		
-/*		
+		
 	private void afficherBtChandelle()
 		{
 			btTournerDroite.setVisible(true);
@@ -157,10 +181,15 @@ import yolocorp.fowlercastle.model.FacadeCoffre;
 		{
 			btRemettreLivre.setVisible(false);
 		}
-*/
+
 		
 		public static void main(String[] args) {
 			FenetreChateauMedieval c = new FenetreChateauMedieval();
+		}
+
+		@Override
+		public void update(Coffre coffre) {
+			coffre.nomEtat();
 		}
 
 
