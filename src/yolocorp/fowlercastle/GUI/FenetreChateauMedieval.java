@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import yolocorp.fowlercastle.controler.CoffreControler;
+import yolocorp.fowlercastle.controler.I_CoffreControler;
 import yolocorp.fowlercastle.model.Coffre;
 import yolocorp.fowlercastle.model.FacadeCoffre;
 import yolocorp.fowlercastle.observateur.Observateur;
@@ -22,7 +24,8 @@ import yolocorp.fowlercastle.observateur.Observateur;
 		private FenetreEtat fenetreEtat;
 		private FenetreLapinTueur fenetreLapin;
 		
-		private FacadeCoffre coffre;
+		private FacadeCoffre facadeCoffre;
+		private I_CoffreControler coffreControler;
 
 		
 		
@@ -69,28 +72,28 @@ import yolocorp.fowlercastle.observateur.Observateur;
 			addWindowListener(this);
 			setVisible(true);
 			
-			this.coffre = new FacadeCoffre();
+			this.facadeCoffre = new FacadeCoffre();
 			this.fenetreChien = new FenetreChienGentil();
 			this.fenetreEtat = new FenetreEtat();
 			this.fenetreLapin = new FenetreLapinTueur();
 			
-			this.coffre.addObservateur(fenetreChien);
-			this.coffre.addObservateur(fenetreEtat);
-			this.coffre.addObservateur(fenetreLapin);			
+			this.facadeCoffre.addObservateur(fenetreChien);
+			this.facadeCoffre.addObservateur(fenetreEtat);
+			this.facadeCoffre.addObservateur(fenetreLapin);			
 		}
 		
 		public void actionPerformed(ActionEvent e) {
 						
 			if (e.getSource() == btOterLivre) {
 				System.out.println("Vous venez d'appuyer sur le bouton Oter Livre UML");
-				coffre.oterLivre();
+				coffreControler.oterLivre();
 				cacherBtOterLivre();
 				afficherBtChandelle();
 				afficherBtRemettreLivre();
 			}
 			if (e.getSource() == btRemettreLivre) {
 				System.out.println("Vous venez d'appuyer sur le bouton Remettre Livre UML");
-				coffre.remettreLivre();
+				coffreControler.remettreLivre();
 				afficherBtOterLivre();
 				cacherBtChandelle();
 				cacherBtFermerCoffre();
@@ -98,15 +101,15 @@ import yolocorp.fowlercastle.observateur.Observateur;
 			}
 			if (e.getSource() == btTournerGauche) {
 				System.out.println("Vous venez d'appuyer sur le bouton Tourner Chandelle vers la Gauche");
-				coffre.tournerChandelleVersGauche();
+				coffreControler.tournerChandelleVersGauche();
 				cacherBtChandelle();
 				cacherBtFermerCoffre();
 				cacherBtRemettreLivre();
 			}
 			if (e.getSource() == btTournerDroite) {
 				System.out.println("Vous venez d'appuyer sur le bouton Tourner Chandelle vers la Droite");
-				coffre.tournerChandelleVersDroite();
-				if(coffre.nomEtat().equals("Ouvert")) {
+				coffreControler.tournerChandelleVersDroite();
+				if(facadeCoffre.nomEtat().equals("Ouvert")) {
 					cacherBtChandelle();
 					cacherBtRemettreLivre();
 					afficherBtFermerCoffre();
@@ -114,7 +117,7 @@ import yolocorp.fowlercastle.observateur.Observateur;
 			}
 			if (e.getSource() == btFermerCoffre) {
 				System.out.println("Vous venez d'appuyer sur le bouton Fermer Coffre");
-				coffre.fermerCoffre();
+				coffreControler.fermerCoffre();
 				afficherBtChandelle();
 				afficherBtRemettreLivre();
 				cacherBtFermerCoffre();

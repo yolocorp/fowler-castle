@@ -84,4 +84,29 @@ public class Coffre implements I_Coffre {
 			o.update(this);
 		}
 	}
+
+	@Override
+	public boolean peutOterLivreUML() {
+		return false;
+	}
+
+	@Override
+	public boolean peutRemettreLivreUml() {
+		return false;
+	}
+
+	@Override
+	public boolean peutTournerChandelleVersGauche() {
+		return false;
+	}
+
+	@Override
+	public boolean peutTournerChandelleVersDroite() {
+		return false;
+	}
+
+	@Override
+	public boolean peutFermerCoffre() {
+		return false;
+	}
 }

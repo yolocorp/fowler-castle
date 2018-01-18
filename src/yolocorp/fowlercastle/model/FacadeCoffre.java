@@ -56,4 +56,29 @@ public class FacadeCoffre implements I_Coffre{
 	public void notifyObservateur() {
 		coffre.notifyObservateur();
 	}
+
+	@Override
+	public boolean peutOterLivreUML() {
+		return false;
+	}
+
+	@Override
+	public boolean peutRemettreLivreUml() {
+		return false;
+	}
+
+	@Override
+	public boolean peutTournerChandelleVersGauche() {
+		return false;
+	}
+
+	@Override
+	public boolean peutTournerChandelleVersDroite() {
+		return false;
+	}
+
+	@Override
+	public boolean peutFermerCoffre() {
+		return false;
+	}
 }

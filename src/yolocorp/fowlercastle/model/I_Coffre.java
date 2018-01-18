@@ -20,6 +20,16 @@ public interface I_Coffre {
 	
 	public abstract String nomEtat();
 	
+	public abstract boolean peutOterLivreUML();
+	
+	public abstract boolean peutRemettreLivreUml();
+
+	public abstract boolean peutTournerChandelleVersGauche();
+
+	public abstract boolean peutTournerChandelleVersDroite();
+	
+	public abstract boolean peutFermerCoffre();
+
 	public void addObservateur(Observateur o);
 	
 	public void removeObservateur(Observateur o);
